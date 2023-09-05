@@ -39,6 +39,11 @@ namespace RunGroupWebApp.Repository
             return await _context.Races.Include(r=>r.Address).FirstOrDefaultAsync(r=>r.Id==id);
         }
 
+        public async Task<Race> GetByIdAsyncNoTracking(int id)
+        {
+            return await _context.Races.Include(r => r.Address).AsNoTracking().FirstOrDefaultAsync(r => r.Id == id);
+        }
+
         public bool Save()
         {
             var saved = _context.SaveChanges();
